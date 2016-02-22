@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="Sharing Settings">
+        <EditTextPreference android:title="Share Subject"
+
+            android:summary="The default subject of the message created when sharing."></EditTextPreference>
+        <EditTextPreference android:title="Share Text"
+            android:summary="The default text of the message created when sharing."></EditTextPreference>
+    </PreferenceCategory>
+
+
+    
+</PreferenceScreen>
