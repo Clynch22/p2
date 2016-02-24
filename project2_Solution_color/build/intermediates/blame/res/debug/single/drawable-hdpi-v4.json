@@ -20,12 +20,12 @@
         "source": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
-        "source": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
         "merged": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
         "source": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-hdpi\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "C:\\Users\\CodyADMIN\\Downloads\\P2_skel\\P2_skel\\project2_Solution_color\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",

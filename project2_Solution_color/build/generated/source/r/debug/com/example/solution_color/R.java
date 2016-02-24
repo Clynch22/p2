@@ -1648,8 +1648,8 @@ containing a value of this type.
         public static final int icon=0x7f0c0029;
         public static final int ifRoom=0x7f0c001d;
         public static final int image=0x7f0c0026;
-        public static final int imageView=0x7f0c0050;
-        public static final int imageView2=0x7f0c0052;
+        public static final int imageView=0x7f0c0052;
+        public static final int imageView2=0x7f0c0051;
         public static final int info=0x7f0c005e;
         public static final int line1=0x7f0c0058;
         public static final int line3=0x7f0c005c;
@@ -1703,7 +1703,7 @@ containing a value of this type.
         public static final int time=0x7f0c0059;
         public static final int title=0x7f0c002a;
         public static final int title_template=0x7f0c002f;
-        public static final int toolbar=0x7f0c0051;
+        public static final int toolbar=0x7f0c0050;
         public static final int topPanel=0x7f0c002e;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
