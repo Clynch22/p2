@@ -1370,20 +1370,20 @@ containing a value of this type.
         public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f070007;
     }
     public static final class color {
-        public static final int abc_background_cache_hint_selector_material_dark=0x7f0b003d;
-        public static final int abc_background_cache_hint_selector_material_light=0x7f0b003e;
-        public static final int abc_color_highlight_material=0x7f0b003f;
+        public static final int abc_background_cache_hint_selector_material_dark=0x7f0b003e;
+        public static final int abc_background_cache_hint_selector_material_light=0x7f0b003f;
+        public static final int abc_color_highlight_material=0x7f0b0040;
         public static final int abc_input_method_navigation_guard=0x7f0b0000;
-        public static final int abc_primary_text_disable_only_material_dark=0x7f0b0040;
-        public static final int abc_primary_text_disable_only_material_light=0x7f0b0041;
-        public static final int abc_primary_text_material_dark=0x7f0b0042;
-        public static final int abc_primary_text_material_light=0x7f0b0043;
-        public static final int abc_search_url_text=0x7f0b0044;
+        public static final int abc_primary_text_disable_only_material_dark=0x7f0b0041;
+        public static final int abc_primary_text_disable_only_material_light=0x7f0b0042;
+        public static final int abc_primary_text_material_dark=0x7f0b0043;
+        public static final int abc_primary_text_material_light=0x7f0b0044;
+        public static final int abc_search_url_text=0x7f0b0045;
         public static final int abc_search_url_text_normal=0x7f0b0001;
         public static final int abc_search_url_text_pressed=0x7f0b0002;
         public static final int abc_search_url_text_selected=0x7f0b0003;
-        public static final int abc_secondary_text_material_dark=0x7f0b0045;
-        public static final int abc_secondary_text_material_light=0x7f0b0046;
+        public static final int abc_secondary_text_material_dark=0x7f0b0046;
+        public static final int abc_secondary_text_material_light=0x7f0b0047;
         public static final int accent=0x7f0b0004;
         public static final int accent_material_dark=0x7f0b0005;
         public static final int accent_material_light=0x7f0b0006;
@@ -1439,10 +1439,11 @@ containing a value of this type.
         public static final int secondary_text_disabled_material_light=0x7f0b0038;
         public static final int switch_thumb_disabled_material_dark=0x7f0b0039;
         public static final int switch_thumb_disabled_material_light=0x7f0b003a;
-        public static final int switch_thumb_material_dark=0x7f0b0047;
-        public static final int switch_thumb_material_light=0x7f0b0048;
+        public static final int switch_thumb_material_dark=0x7f0b0048;
+        public static final int switch_thumb_material_light=0x7f0b0049;
         public static final int switch_thumb_normal_material_dark=0x7f0b003b;
         public static final int switch_thumb_normal_material_light=0x7f0b003c;
+        public static final int toolbarTransparent=0x7f0b003d;
     }
     public static final class dimen {
         public static final int abc_action_bar_content_inset_material=0x7f08000d;
@@ -1649,7 +1650,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f0c001d;
         public static final int image=0x7f0c0026;
         public static final int imageView=0x7f0c0052;
-        public static final int imageView2=0x7f0c0051;
+        public static final int imageView2=0x7f0c0050;
         public static final int info=0x7f0c005e;
         public static final int line1=0x7f0c0058;
         public static final int line3=0x7f0c005c;
@@ -1703,7 +1704,7 @@ containing a value of this type.
         public static final int time=0x7f0c0059;
         public static final int title=0x7f0c002a;
         public static final int title_template=0x7f0c002f;
-        public static final int toolbar=0x7f0c0050;
+        public static final int toolbar=0x7f0c0051;
         public static final int topPanel=0x7f0c002e;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;
