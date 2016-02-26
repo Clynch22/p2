@@ -9,17 +9,17 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_reset"
-        android:orderInCategory="100"
+        android:orderInCategory="150"
         android:title="Reset"
         android:icon="@drawable/ic_arrow"
-        and:showAsAction="ifRoom"
+        and:showAsAction="always"
         ></item>
     <item
         android:id="@+id/action_sketchy"
         android:orderInCategory="200"
         android:title="Sketchy"
         android:icon="@drawable/ic_pencil"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         ></item>
     <item
         android:id="@+id/action_share"
@@ -27,14 +27,14 @@
         android:title="Share"
         android:icon="@drawable/ic_share"
 
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         ></item>
     <item
         android:id="@+id/action_colorize"
         android:orderInCategory="300"
         android:title="Colorize"
         android:icon="@drawable/ic_eye"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         ></item>
 
 

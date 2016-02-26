@@ -80,8 +80,10 @@ public class MainActivity extends AppCompatActivity  {
 
 
     }
+
     public void getPrefs(){
-        myPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+         myPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
          sText = myPref.getString("pref_sub", "Sample Subject");
          mText = myPref.getString("pref_text", "Sample Message");
     }
