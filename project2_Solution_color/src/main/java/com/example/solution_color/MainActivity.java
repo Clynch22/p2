@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity  {
     private int screenwidth;
     private String sText;
     private String mText;
-
+    private float saturation;
+    private int sketch;
     private String[] perms = {"android.permission.READ_EXTERNAL_STORAGE"};
 
     @Override
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity  {
         getPrefs();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         bg = (ImageView)findViewById(R.id.imageView2);
 
@@ -84,8 +86,10 @@ public class MainActivity extends AppCompatActivity  {
     public void getPrefs(){
          myPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-         sText = myPref.getString("pref_sub", "Sample Subject");
+        sText = myPref.getString("pref_sub", "Sample Subject");
          mText = myPref.getString("pref_text", "Sample Message");
+        saturation = Float.parseFloat(myPref.getString("pref_sat", "122.5f"));
+        sketch = Integer.parseInt(myPref.getString("pref_ske", "50"));
     }
     private SharedPreferences.OnSharedPreferenceChangeListener listener;
     public void doPrefs(){
@@ -93,10 +97,16 @@ public class MainActivity extends AppCompatActivity  {
             @Override
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key){
                 if(key.equals("pref_sub")){
-                    String myString = myPref.getString("pref_sub", "Sample Subject");
+                    sText = myPref.getString("pref_sub", "Sample Subject");
                 }
                 if(key.equals("pref_text")){
-                    String myString2 = myPref.getString("pref_sub", "Sample Text");
+                    mText = myPref.getString("pref_sub", "Sample Text");
+                }
+                if(key.equals("pref_sat")){
+                    saturation = myPref.getFloat("pref_sat", 122.5f);
+                }
+                if(key.equals("pref_ske")){
+                     sketch=  myPref.getInt("pref_ske", 50);
                 }
 
             }
@@ -178,7 +188,7 @@ public class MainActivity extends AppCompatActivity  {
     public void doBNW(){
         bMap = new BitmapDrawable(getResources(),curPPath);
         theBitMap1  = BitMap_Helpers.copyBitmap(bMap);
-        bnw =  BitMap_Helpers.thresholdBmp(theBitMap1, Constants.randColor);
+        bnw =  BitMap_Helpers.thresholdBmp(theBitMap1, sketch);
         File image = btoF(bnw);
         curPPath = image.getAbsolutePath();
         bg.setImageBitmap(Camera_Helpers.loadAndScaleImage(curPPath, screenheight, screenwidth));
@@ -220,10 +230,10 @@ public class MainActivity extends AppCompatActivity  {
         bMap = new BitmapDrawable(getResources(),curPPath);
         theBitMap1  = BitMap_Helpers.copyBitmap(bMap);
         theBitMap2= BitMap_Helpers.copyBitmap(bMap);
-        bnw =  BitMap_Helpers.thresholdBmp(theBitMap1, Constants.randColor);
-        colorBitMap = BitMap_Helpers.colorBmp(theBitMap2, Constants.floatOf);
-        BitMap_Helpers.thresholdBmp(theBitMap1, Constants.randColor);
-       BitMap_Helpers.colorBmp(theBitMap2, Constants.floatOf);
+        bnw =  BitMap_Helpers.thresholdBmp(theBitMap1, sketch);
+        colorBitMap = BitMap_Helpers.colorBmp(theBitMap2, saturation);
+        BitMap_Helpers.thresholdBmp(theBitMap1, sketch);
+       BitMap_Helpers.colorBmp(theBitMap2, saturation);
         BitMap_Helpers.merge(colorBitMap, bnw);
         File image = btoF(colorBitMap);
         curPPath = image.getAbsolutePath();

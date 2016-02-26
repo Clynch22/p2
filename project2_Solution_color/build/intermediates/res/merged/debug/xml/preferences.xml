@@ -10,6 +10,22 @@
             android:key="pref_text"
             android:defaultValue="Sample Text"
             android:summary="The default text of the message created when sharing."></EditTextPreference>
+        <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+            android:title="Customize Image">
+            <EditTextPreference
+                android:title="Sketchiness"
+                android:key="pref_ske"
+                android:defaultValue="50"
+                android:summary="Sets the BNW threshold. The threshhold rand is 0-99">
+
+            </EditTextPreference>
+            <EditTextPreference
+                android:title="Saturation"
+                android:key="pref_sat"
+
+                android:summary="Sets the color saturation. The range of saturation is from 0-255.0"
+                ></EditTextPreference>
+            </PreferenceScreen>
     </PreferenceCategory>
 
 
