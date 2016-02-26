@@ -3,9 +3,12 @@
     <PreferenceCategory
         android:title="Sharing Settings">
         <EditTextPreference android:title="Share Subject"
-
+            android:key="pref_sub"
+            android:defaultValue="Sample Subject "
             android:summary="The default subject of the message created when sharing."></EditTextPreference>
         <EditTextPreference android:title="Share Text"
+            android:key="pref_text"
+            android:defaultValue="Sample Text"
             android:summary="The default text of the message created when sharing."></EditTextPreference>
     </PreferenceCategory>
 

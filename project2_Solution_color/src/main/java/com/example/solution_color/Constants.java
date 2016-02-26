@@ -13,7 +13,7 @@ public class Constants{
     private static final String DEF_PREF_FILE_NAME = "PrefFile";
     public static final String DEF_SUBJECT_TEXT = "Subject text";
     public static final String DEF_MESSAGE_TEXT = "Message text";
-
+    public static final String PREF_NAME = "MyPrefsFile";
     public static final String makeFloat = rand.nextInt(255 - 0) + 1 + ".0";
     public static final int randColor = rand.nextInt(99);
     public static final float floatOf = Float.parseFloat(makeFloat);

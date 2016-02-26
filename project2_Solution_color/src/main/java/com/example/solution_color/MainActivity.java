@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,12 +27,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.library.bitmap_utilities.BitMap_Helpers;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,16 +48,20 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 public class MainActivity extends AppCompatActivity  {
     private String curPPath;
     private ImageView bg;
-    private File PROCESSED_FILE;
-   Drawable bMap;
-    Bitmap theBitMap1;
-    Bitmap theBitMap2;
-    Bitmap bnw;
-    Bitmap colorBitMap;
 
-    int screenheight;
-    int screenwidth;
-    String[] perms = {"android.permission.READ_EXTERNAL_STORAGE"};
+    private Drawable bMap;
+    private Bitmap theBitMap1;
+    private Bitmap theBitMap2;
+    private Bitmap bnw;
+    private SharedPreferences myPref;
+    private Bitmap colorBitMap;
+    private EditText sub;
+    private int screenheight;
+    private int screenwidth;
+    private String sText;
+    private String mText;
+
+    private String[] perms = {"android.permission.READ_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +72,34 @@ public class MainActivity extends AppCompatActivity  {
         DisplayMetrics metrics = this.getResources().getDisplayMetrics();
         screenheight = metrics.heightPixels;
         screenwidth = metrics.widthPixels;
+        getPrefs();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         bg = (ImageView)findViewById(R.id.imageView2);
 
 
+    }
+    public void getPrefs(){
+        myPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+         sText = myPref.getString("pref_sub", "Sample Subject");
+         mText = myPref.getString("pref_text", "Sample Message");
+    }
+    private SharedPreferences.OnSharedPreferenceChangeListener listener;
+    public void doPrefs(){
+        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+        public void onSharedPreferenceChanged(SharedPreferences prefs, String key){
+                if(key.equals("pref_sub")){
+                    String myString = myPref.getString("pref_sub", "Sample Subject");
+                }
+                if(key.equals("pref_text")){
+                    String myString2 = myPref.getString("pref_sub", "Sample Text");
+                }
+
+            }
+        };
+        myPref.registerOnSharedPreferenceChangeListener(listener);
     }
     @Override
 
@@ -87,6 +118,11 @@ public class MainActivity extends AppCompatActivity  {
         }
 
     }
+
+
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -118,21 +154,65 @@ public class MainActivity extends AppCompatActivity  {
         }
         return true;
     }
-    public void savePreferences(String subject, String message){
-        SharedPreferences settings = getSharedPreferences("PrefFile",MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        return true;
     }
+
+    /**
+     * Resets the default picture
+     */
     public void doReset(){
+        Camera_Helpers.delSavedImage(curPPath);
         bg.setImageResource(R.drawable.gutters);
         bg.setScaleType(ImageView.ScaleType.FIT_CENTER);
         bg.setScaleType(ImageView.ScaleType.FIT_XY);
     }
+
+    /**
+     * Converts a picture to black and white
+     */
     public void doBNW(){
         bMap = new BitmapDrawable(getResources(),curPPath);
         theBitMap1  = BitMap_Helpers.copyBitmap(bMap);
         bnw =  BitMap_Helpers.thresholdBmp(theBitMap1, Constants.randColor);
-        bg.setImageBitmap(bnw);
+        File image = btoF(bnw);
+        curPPath = image.getAbsolutePath();
+        bg.setImageBitmap(Camera_Helpers.loadAndScaleImage(curPPath, screenheight, screenwidth));
     }
+    //Converts a bitmap to a file in order to obtain the updated image file URI(Used in colorize and bnw)
+    private File btoF(Bitmap bitmap){
+
+        File f = new File(this.getCacheDir(), "f");
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap bMap = bitmap;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    return f;
+    }
+
+    /**
+     * produces a colorized version of an image
+     */
     public void doColorize(){
 
         bMap = new BitmapDrawable(getResources(),curPPath);
@@ -143,13 +223,21 @@ public class MainActivity extends AppCompatActivity  {
         BitMap_Helpers.thresholdBmp(theBitMap1, Constants.randColor);
        BitMap_Helpers.colorBmp(theBitMap2, Constants.floatOf);
         BitMap_Helpers.merge(colorBitMap, bnw);
-       bg.setImageBitmap(colorBitMap);
+        File image = btoF(colorBitMap);
+        curPPath = image.getAbsolutePath();
+        bg.setImageBitmap(Camera_Helpers.loadAndScaleImage(curPPath, screenheight, screenwidth));
     }
-    public void doShare(){ //NEED TO SET TEXTS
+
+    /**
+     * shares an image with a default subject and message
+     */
+    public void doShare(){
         Intent shareIntent = new Intent();
         File f = new File(curPPath);
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, sText);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mText);
         shareIntent.setType("image/jpeg");
         startActivity(Intent.createChooser(shareIntent, "Send to"));
 
@@ -163,9 +251,6 @@ public class MainActivity extends AppCompatActivity  {
 
         String name = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
         File imagesFolder = new File(name);
-
-
-
         if (!imagesFolder.mkdirs()) {
             if (!imagesFolder.exists()) { Toast.makeText(this, "Folder error", Toast.LENGTH_SHORT).show();
                 return;
@@ -174,7 +259,6 @@ public class MainActivity extends AppCompatActivity  {
         File image = new File(imagesFolder, "JPEG_" + timeStamp + ".jpg");
         Uri uriSavedImage = Uri.fromFile(image);
         curPPath = image.getAbsolutePath();
-        PROCESSED_FILE = image;
         imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
         startActivityForResult(imageIntent, Constants.TAKE_PICTURE);
 
@@ -182,11 +266,23 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
+            if(resultCode == Activity.RESULT_OK) {
+                bg.setImageBitmap(Camera_Helpers.loadAndScaleImage(curPPath, screenheight, screenwidth));
+            }
 
-            bg.setImageBitmap(Camera_Helpers.loadAndScaleImage(curPPath,screenheight, screenwidth));
+
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
 
 
+        SharedPreferences settings = getSharedPreferences(Constants.PREF_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
 
+
+        // Commit the edits!
+        editor.commit();
     }
 }
 
